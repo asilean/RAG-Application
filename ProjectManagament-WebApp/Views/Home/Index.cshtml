@@ -1,0 +1,90 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+
+}
+<div class="text-center">
+    @if (true)
+    {
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button @(Context.Request.Query.Count() > 0 ? "collapsed" : "")" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="@(Context.Request.Query.Count() > 0 ? "false" : "true")" aria-controls="collapseOne">
+                        Search Tool
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse @(Context.Request.Query.Count() > 0 ? "" : "show")" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <form asp-controller="Scan" asp-action="Index" method="get">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="input-group mb-3">
+                                        <label class="input-group-text">Select Module</label>
+                                        <select class="form-select" name="Select Module">
+                                            <option value="">Module 1</option>
+                                            <option value="">Module 2</option>
+                                            <option value="">Module 3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                @if (true) //according to module
+                                {
+                                    <div class="col-6">
+                                        <div class="input-group mb-3">
+                                            <label class="input-group-text">Institute</label>
+                                            <input type="text" class="form-control" name="Institute" placeholder="Institute" aria-label="Institute" aria-describedby="basic-addon1" value="@Context.Request.Query["Institute"]">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <label class="input-group-text">Language</label>
+                                            <select class="form-select" name="Language">
+                                                <option value="">All</option>
+                                            </select>
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <label class="input-group-text">Author</label>
+                                            <input type="text" class="form-control" name="Author" placeholder="Author" aria-label="Author" aria-describedby="basic-addon1" value="@Context.Request.Query["Author"]">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <label class="input-group-text">Keyword</label>
+                                            <input type="text" class="form-control" name="Keyword" placeholder="Keyword" aria-label="Keyword" aria-describedby="basic-addon1" value="@Context.Request.Query["Keyword"]">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="input-group mb-3">
+                                            <label class="input-group-text">Thesis Type</label>
+                                            <select class="form-select" name="ThesisType">
+                                                <option value="">All</option>
+                                            </select>
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <label class="input-group-text">Thesis No</label>
+                                            <input type="number" class="form-control" name="ThesisNo" placeholder="Thesis No" aria-label="Thesis No" aria-describedby="basic-addon1" value="@Context.Request.Query["ThesisNo"]">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <label class="input-group-text">Thesis Name</label>
+                                            <input type="text" class="form-control" name="ThesisName" placeholder="Thesis Name" aria-label="Thesis Name" aria-describedby="basic-addon1" value="@Context.Request.Query["ThesisName"]">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <label class="input-group-text">Year</label>
+                                            <input type="number" class="form-control" name="YearMin" placeholder="Min" aria-label="Year Min" aria-describedby="basic-addon1" value="@Context.Request.Query["YearMin"]">
+                                            <label class="input-group-text">-</label>
+                                            <input type="number" class="form-control" name="YearMax" placeholder="Max" aria-label="Year Max" aria-describedby="basic-addon1" value="@Context.Request.Query["YearMax"]">
+                                        </div>
+                                        <div>
+                                            <button type="submit" class="btn btn-primary float-end">Search</button>
+                                            <a class="btn btn-danger float-end mx-3" asp-controller="Scan" asp-action="Index">Clear Filter(s)</a>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    @if (false) //not logged in
+    {
+        <h1 class="display-4">Welcome to Companier</h1>
+        <p>Use this app to manage your company</p>
+    }
+</div>
