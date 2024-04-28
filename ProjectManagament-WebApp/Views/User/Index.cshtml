@@ -1,0 +1,44 @@
+﻿@model LoginViewModel
+
+@{
+    Layout = @"~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Login";
+}
+
+<section class="vh-100 gradient-custom">
+    <div class="container py-5 h-50">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+                        <form asp-action="Login" method="post">
+                            <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+                            <p class="text-white-50 mb-5">Please enter your email and password!</p>
+
+                            <div class="form-outline form-white mb-4">
+                                <label class="form-label fw-bold">Email</label>
+                                <input asp-for="Email" type="email" placeholder="sample@example.com" class="form-control form-control-lg" required />
+                            </div>
+                            <div class="form-outline form-white mb-4">
+                                <label class="form-label fw-bold">Password</label>
+                                <input asp-for="Password" type="password" placeholder="********" class="form-control form-control-lg" required />
+                            </div>
+
+                            <button class="btn btn-outline-light btn-lg px-5 mt-4" type="submit">Login</button>
+
+                            <p class="small mt-3 pb-lg-2">
+                                <a class="text-white-50" asp-action="ForgotPassword" asp-controller="User">Forgot password?</a>
+                            </p>
+                            @if (!string.IsNullOrEmpty(ViewBag.Error))
+                            {
+                                <div class="alert alert-danger mt-3" role="alert">
+                                    @ViewBag.Error
+                                </div>
+                            }
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

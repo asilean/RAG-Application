@@ -5,6 +5,10 @@ namespace ProjectManagament_WebApp.Data
 {
     public class PMContext : DbContext
     {
+        public PMContext(DbContextOptions<PMContext> options) : base(options)
+        {
+        }
+
         public DbSet<User> Users { get; set; }
         public DbSet<Module> Modules { get; set; }
         public DbSet<ConversationHistory> ConversationHistories { get; set; }

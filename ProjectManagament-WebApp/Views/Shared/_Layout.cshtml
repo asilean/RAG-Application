@@ -21,11 +21,14 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    @if (true)//User.Identity.IsAuthenticated
+                    @if (User.Identity.IsAuthenticated)
                     {
                         <ul class="navbar-nav flex-grow-1 justify-content-end">
                             <li>
-                                <a class="nav-link text-dark" asp-controller="Logout" asp-action="Index">Logout</a>
+                                <span class="nav-link text-dark mx-2">Welcome, @User.Identity.Name.Substring(0, User.Identity.Name.IndexOf("@"))!</span>
+                            </li>
+                            <li>
+                                <a class="nav-link text-dark" asp-controller="User" asp-action="Logout">Logout</a>
                             </li>
                         </ul>
                     }
@@ -33,7 +36,7 @@
                     {
                         <ul class="navbar-nav flex-grow-1 justify-content-end">
                             <li>
-                                <a class="nav-link text-dark" asp-controller="Login" asp-action="Index">Login</a>
+                                <a class="nav-link text-dark" asp-controller="User" asp-action="Index">Login</a>
                             </li>
                         </ul>
                     }

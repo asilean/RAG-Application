@@ -2,55 +2,60 @@
     ViewData["Title"] = "Home Page";
 
 }
-<div class="text-center">
-    @if (true) //logged in
-    {
-        <div class="">
-            <div class="row">
-                <ul class="nav nav-pills nav-fill">
-                    <li class="nav-item mx-2">
-                        <button class="nav-link module fw-bold text-light bg-danger active" id="module-1" type="button">Module 1</button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="nav-link module fw-bold text-light bg-success bg-opacity-25" id="module-2" type="button">Module 2</button>
-                    </li>
-                    <li class="nav-item mx-2">
-                        <button class="nav-link module fw-bold text-light bg-info bg-opacity-25" id="module-3" type="button">Module 3</button>
-                    </li>
-                </ul>
-            </div>
-            <div class="row">
-                <!-- Chats container -->
-                <div class="chat-container"></div>
 
-                <!-- Typing container -->
-                <div class="typing-container">
-                    <div class="typing-content">
-                        <div class="typing-textarea">
-                            <textarea id="chat-input" spellcheck="false" placeholder="Enter a prompt here" required></textarea>
-                            <span id="send-btn" class="material-symbols-rounded">
-                                <i class="bi bi-send-fill"></i>
-                            </span>
-                        </div>
-                        <div class="typing-controls">
-                            <span id="delete-btn" class="material-symbols-rounded">
-                                <i class="bi bi-trash-fill"></i>
-                            </span>
-                            <span id="theme-btn" class="material-symbols-rounded">
-                                <i class="bi bi-moon-fill"></i>
-                            </span>
-                        </div>
-                    </div>
+@if (User.Identity.IsAuthenticated) //logged in
+{
+    <div class="row">
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item mx-2">
+                <button class="nav-link module fw-bold text-light bg-danger active" id="module-1" type="button">Module 1</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link module fw-bold text-light bg-success bg-opacity-25" id="module-2" type="button">Module 2</button>
+            </li>
+            <li class="nav-item mx-2">
+                <button class="nav-link module fw-bold text-light bg-info bg-opacity-25" id="module-3" type="button">Module 3</button>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <!-- Chats container -->
+        <div class="chat-container"></div>
+
+        <!-- Typing container -->
+        <div class="typing-container">
+            <div class="typing-content">
+                <div class="typing-textarea">
+                    <textarea id="chat-input" spellcheck="false" placeholder="Enter a prompt here" required></textarea>
+                    <span id="send-btn" class="material-symbols-rounded">
+                        <i class="bi bi-send-fill"></i>
+                    </span>
+                </div>
+                <div class="typing-controls">
+                    <span id="delete-btn" class="material-symbols-rounded">
+                        <i class="bi bi-trash-fill"></i>
+                    </span>
+                    <span id="theme-btn" class="material-symbols-rounded">
+                        <i class="bi bi-moon-fill"></i>
+                    </span>
                 </div>
             </div>
         </div>
-    }
-    @if (false) //not logged in
-    {
-        <h1 class="display-4">Welcome to Companier</h1>
-        <p>Use this app to manage your company</p>
-    }
-</div>
+    </div>
+}
+else //not logged in
+{
+    <div class="container">
+        <div class="text-center text-light mt-5 pt-5">
+            <h1 class="display-4">Welcome to Companier</h1>
+            <br />
+            <h3>Use this app to manage your company</h3>
+            <br />
+            <h5><a asp-controller="User" asp-action="Index">Log in</a> to get started</h5>
+        </div>
+    </div>
+}
+
 @section Scripts {
     <script>
         $(".module").on("click", function () {
