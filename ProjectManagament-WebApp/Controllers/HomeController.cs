@@ -26,6 +26,16 @@ namespace ProjectManagament_WebApp.Controllers
             return View();
         }
 
+        [HttpGet]
+        //public IActionResult GetModuleContent(Guid moduleId)
+        //{
+        //    // Logic to fetch and return module content based on moduleId
+        //    // For example:
+        //    var moduleContent = _context.GetModuleContentById(moduleId);
+        //    return PartialView("_ModuleContent", moduleContent);
+        //}
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

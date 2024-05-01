@@ -8,13 +8,13 @@
     <div class="row">
         <ul class="nav nav-pills nav-fill">
             <li class="nav-item mx-2">
-                <button class="nav-link module fw-bold text-light bg-danger active" id="module-1" type="button">Module 1</button>
+                <button class="nav-link module fw-bold text-light bg-danger active" id="module-1" value="29931809-ec70-433b-9ecf-def9c7189e39" type="button">Module 1</button>
             </li>
             <li class="nav-item">
-                <button class="nav-link module fw-bold text-light bg-success bg-opacity-25" id="module-2" type="button">Module 2</button>
+                <button class="nav-link module fw-bold text-light bg-success bg-opacity-25" id="module-2" value="394ad26d-99bf-48ff-bcd7-332d5c66f7ce" type="button">Module 2</button>
             </li>
             <li class="nav-item mx-2">
-                <button class="nav-link module fw-bold text-light bg-info bg-opacity-25" id="module-3" type="button">Module 3</button>
+                <button class="nav-link module fw-bold text-light bg-info bg-opacity-25" id="module-3" value="7c1f7fc4-ab3a-486f-b7fd-4ea9b99b2571" type="button">Module 3</button>
             </li>
         </ul>
     </div>
@@ -61,6 +61,29 @@ else //not logged in
         $(".module").on("click", function () {
             $(".module.active").removeClass("active").addClass("bg-opacity-25");
             $(this).addClass("active").removeClass("bg-opacity-25");
+        });
+
+        $(document).ready(function () {
+            // Handle click events on module buttons
+            $('.module').click(function () {
+                var moduleId = $(this).data('module');
+                loadModuleContent(moduleId);
+            });
+
+            // Function to load module content via AJAX
+            function loadModuleContent(moduleId) {
+                $.ajax({
+                    url: '/Home/GetModuleContent', // Update with your backend endpoint
+                    type: 'GET',
+                    data: { moduleId: moduleId },
+                    success: function (response) {
+                        $('#module-content').html(response);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            }
         });
     </script>
     <script src="~/js/chat.js"></script>
