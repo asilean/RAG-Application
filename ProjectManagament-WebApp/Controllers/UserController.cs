@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using ProjectManagament_WebApp.Data;
 using ProjectManagament_WebApp.Data.Models;
 using ProjectManagament_WebApp.Models;
+using ProjectManagament_WebApp.Sevices;
 using System.Security.Claims;
 
 namespace ProjectManagament_WebApp.Controllers
@@ -12,10 +13,12 @@ namespace ProjectManagament_WebApp.Controllers
     public class UserController : Controller
     {
         private readonly PMContext _context;
+        private readonly IEmailService _emailService;
 
-        public UserController(PMContext context)
+        public UserController(PMContext context, IEmailService emailService)
         {
             _context = context;
+            _emailService = emailService;
         }
 
         public IActionResult Index()
@@ -56,6 +59,29 @@ namespace ProjectManagament_WebApp.Controllers
         [HttpPost]
         public IActionResult SendCode(string email)
         {
+            var user = _context.Users.FirstOrDefault(u => u.Email == email);
+            if (user == null)
+            {
+                return NotFound(new { success = false, errorMessage = "User not found" });
+            }
+
+            var createdAt = DateTime.UtcNow;
+            var code = new Random().Next(1000, 9999).ToString();
+            ForgotPasswordCode fpCode = new()
+            { 
+                UserId = user.Id,
+                Code = code,
+                CreatedAt = createdAt,
+                ExpiredAt = createdAt.AddMinutes(2),
+                User = user
+            };
+
+            _context.ForgotPasswordCodes.Add(fpCode);
+            _context.SaveChanges();
+
+            // Send code to email
+            _emailService.SendCodeEmail(user.Email, code);
+
             return Json(new { success = true });
         }
 
@@ -68,9 +94,22 @@ namespace ProjectManagament_WebApp.Controllers
         public IActionResult ForgotPassword(ForgotPasswordViewModel viewModel)
         {
             var user = _context.Users.FirstOrDefault(u => u.Email == viewModel.Email);
-            ViewBag.RenewPasswordUserId = user.Id;
+            if (user == null)
+            {
+                ViewBag.Error = "User not found!";
+                return View(viewModel);
+            }
 
-            return View("RenewPassword", new { userId = user.Id });
+            var isCodeValid = _context.ForgotPasswordCodes.Any(c => c.UserId == user.Id && c.Code == viewModel.Code && c.ExpiredAt > DateTime.UtcNow);
+            
+            if (!isCodeValid)
+            {
+                ViewBag.Error = "Code is incorrect or not valid!";
+                ViewBag.ReEnterCode = true;
+                return View(viewModel);
+            }
+
+            return RedirectToAction("RenewPassword", new { userId = user.Id });
         }
 
         public IActionResult RenewPassword(Guid userId)
@@ -90,10 +129,15 @@ namespace ProjectManagament_WebApp.Controllers
             }
 
             var user = _context.Users.FirstOrDefault(u => u.Id == viewModel.UserId);
+            if (user == null)
+            {
+                ViewBag.Error = "User not found!";
+                return View(viewModel);
+            }
             user.Password = viewModel.Password;
             _context.SaveChanges();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "User");
         }
     }
 }

@@ -12,6 +12,7 @@ namespace ProjectManagament_WebApp.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Module> Modules { get; set; }
         public DbSet<ConversationHistory> ConversationHistories { get; set; }
+        public DbSet<ForgotPasswordCode> ForgotPasswordCodes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -40,6 +41,14 @@ namespace ProjectManagament_WebApp.Data
             modelBuilder.Entity<ConversationHistory>().Property(ch => ch.ModuleId).IsRequired();
             modelBuilder.Entity<ConversationHistory>().Property(ch => ch.Context).IsRequired();
             modelBuilder.Entity<ConversationHistory>().Property(ch => ch.Role).IsRequired();
+
+            modelBuilder.Entity<ForgotPasswordCode>().HasKey(fpc => fpc.Id);
+            modelBuilder.Entity<ForgotPasswordCode>().Property(fpc => fpc.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<ForgotPasswordCode>().HasOne(fpc => fpc.User).WithMany(u => u.ForgotPasswordCodes).HasForeignKey(fpc => fpc.UserId);
+            modelBuilder.Entity<ForgotPasswordCode>().Property(fpc => fpc.UserId).IsRequired();
+            modelBuilder.Entity<ForgotPasswordCode>().Property(fpc => fpc.Code).IsRequired();
+            modelBuilder.Entity<ForgotPasswordCode>().Property(fpc => fpc.CreatedAt).IsRequired();
+            modelBuilder.Entity<ForgotPasswordCode>().Property(fpc => fpc.ExpiredAt).IsRequired();
 
             base.OnModelCreating(modelBuilder);
         }

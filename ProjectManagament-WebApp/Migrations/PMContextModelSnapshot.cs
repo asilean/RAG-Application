@@ -54,6 +54,32 @@ namespace ProjectManagament_WebApp.Migrations
                     b.ToTable("ConversationHistories");
                 });
 
+            modelBuilder.Entity("ProjectManagament_WebApp.Data.Models.ForgotPasswordCode", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ExpiredAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ForgotPasswordCodes");
+                });
+
             modelBuilder.Entity("ProjectManagament_WebApp.Data.Models.Module", b =>
                 {
                     b.Property<Guid>("Id")
@@ -114,6 +140,17 @@ namespace ProjectManagament_WebApp.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("ProjectManagament_WebApp.Data.Models.ForgotPasswordCode", b =>
+                {
+                    b.HasOne("ProjectManagament_WebApp.Data.Models.User", "User")
+                        .WithMany("ForgotPasswordCodes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("ProjectManagament_WebApp.Data.Models.Module", b =>
                 {
                     b.Navigation("ConversationHistories");
@@ -122,6 +159,8 @@ namespace ProjectManagament_WebApp.Migrations
             modelBuilder.Entity("ProjectManagament_WebApp.Data.Models.User", b =>
                 {
                     b.Navigation("ConversationHistories");
+
+                    b.Navigation("ForgotPasswordCodes");
                 });
 #pragma warning restore 612, 618
         }

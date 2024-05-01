@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "JGtRNmBQsYOudo/0YLOPijVERv5kYl0f3zEAop5+FHE=",
+  "Hash": "lpk3hV/x+gSP7kPJTLZ/wzc/j8PxicCY7UrciPyUn4A=",
   "Source": "ProjectManagament-WebApp",
   "BasePath": "_content/ProjectManagament-WebApp",
   "Mode": "Default",
@@ -91,25 +91,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
-    },
-    {
-      "Identity": "C:\\Users\\Yigit\\Desktop\\Project Management\\RAG-Application\\ProjectManagament-WebApp\\wwwroot\\dark_light_mode.ico",
-      "SourceId": "ProjectManagament-WebApp",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Yigit\\Desktop\\Project Management\\RAG-Application\\ProjectManagament-WebApp\\wwwroot\\",
-      "BasePath": "_content/ProjectManagament-WebApp",
-      "RelativePath": "dark_light_mode.ico",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\dark_light_mode.ico"
     },
     {
       "Identity": "C:\\Users\\Yigit\\Desktop\\Project Management\\RAG-Application\\ProjectManagament-WebApp\\wwwroot\\favicon.png",

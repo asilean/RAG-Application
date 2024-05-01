@@ -534,8 +534,10 @@ legend + * {
   padding: 0;
 }
 
+::-webkit-outer-spin-button,
 ::-webkit-inner-spin-button {
-  height: auto;
+    -webkit-appearance: none;
+    height: auto;
 }
 
 [type=search] {

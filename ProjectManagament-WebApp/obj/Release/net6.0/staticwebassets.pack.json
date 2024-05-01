@@ -13,10 +13,6 @@
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
-      "Id": "C:\\Users\\Yigit\\Desktop\\Project Management\\RAG-Application\\ProjectManagament-WebApp\\wwwroot\\dark_light_mode.ico",
-      "PackagePath": "staticwebassets\\dark_light_mode.ico"
-    },
-    {
       "Id": "C:\\Users\\Yigit\\Desktop\\Project Management\\RAG-Application\\ProjectManagament-WebApp\\wwwroot\\favicon.png",
       "PackagePath": "staticwebassets\\favicon.png"
     },
