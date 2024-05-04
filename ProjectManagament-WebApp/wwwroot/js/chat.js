@@ -167,5 +167,5 @@ chatInput.addEventListener("keydown", (e) => {
     }
 });
 
-loadDataFromLocalstorage();
+//loadDataFromLocalstorage();
 sendButton.addEventListener("click", handleOutgoingChat);

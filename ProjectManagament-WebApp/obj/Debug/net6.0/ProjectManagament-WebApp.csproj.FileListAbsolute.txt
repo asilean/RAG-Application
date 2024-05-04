@@ -77,3 +77,9 @@ C:\Users\Yigit\Desktop\Project Management\RAG-Application\ProjectManagament-WebA
 C:\Users\Yigit\Desktop\Project Management\RAG-Application\ProjectManagament-WebApp\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
 C:\Users\Yigit\Desktop\Project Management\RAG-Application\ProjectManagament-WebApp\obj\Debug\net6.0\ProjectManagament-WebApp.csproj.AssemblyReference.cache
 C:\Users\Yigit\Desktop\Project Management\RAG-Application\ProjectManagament-WebApp\obj\Debug\net6.0\ProjectManagament-WebApp.csproj.CopyComplete
+C:\Users\Yigit\Desktop\Project Management\RAG-Application\ProjectManagament-WebApp\bin\Debug\net6.0\BouncyCastle.Cryptography.dll
+C:\Users\Yigit\Desktop\Project Management\RAG-Application\ProjectManagament-WebApp\bin\Debug\net6.0\MailKit.dll
+C:\Users\Yigit\Desktop\Project Management\RAG-Application\ProjectManagament-WebApp\bin\Debug\net6.0\MimeKit.dll
+C:\Users\Yigit\Desktop\Project Management\RAG-Application\ProjectManagament-WebApp\bin\Debug\net6.0\System.Formats.Asn1.dll
+C:\Users\Yigit\Desktop\Project Management\RAG-Application\ProjectManagament-WebApp\bin\Debug\net6.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\Yigit\Desktop\Project Management\RAG-Application\ProjectManagament-WebApp\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ProjectManagament-WebApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0dea0cfc31db69ce3e3b2c4193ae25a82783c9c4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+beac1e58244a235336749b19bad40bbc52d60370")]
 [assembly: System.Reflection.AssemblyProductAttribute("ProjectManagament-WebApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ProjectManagament-WebApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

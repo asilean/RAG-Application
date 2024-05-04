@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjectManagament_WebApp.Data;
-using ProjectManagament_WebApp.Data.Models;
+using ProjectManagament_WebApp.Helpers;
 using ProjectManagament_WebApp.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
-using System.Security.Claims;
 
 namespace ProjectManagament_WebApp.Controllers
 {
@@ -27,13 +27,13 @@ namespace ProjectManagament_WebApp.Controllers
         }
 
         [HttpGet]
-        //public IActionResult GetModuleContent(Guid moduleId)
-        //{
-        //    // Logic to fetch and return module content based on moduleId
-        //    // For example:
-        //    var moduleContent = _context.GetModuleContentById(moduleId);
-        //    return PartialView("_ModuleContent", moduleContent);
-        //}
+        public async Task<IActionResult> GetModuleContentAsync(Guid moduleId)
+        {
+            // Logic to fetch and return module content based on moduleId
+            // For example:
+            var moduleContent = await _context.ConversationHistories.Where(c => c.ModuleId == moduleId && c.UserId == UserHelper.GetUserId(User) && c.IsDeleted == false).OrderBy(c => c.CreatedAt).ToListAsync();
+            return Ok(moduleContent);
+        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

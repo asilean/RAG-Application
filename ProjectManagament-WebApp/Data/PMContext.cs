@@ -41,6 +41,8 @@ namespace ProjectManagament_WebApp.Data
             modelBuilder.Entity<ConversationHistory>().Property(ch => ch.ModuleId).IsRequired();
             modelBuilder.Entity<ConversationHistory>().Property(ch => ch.Context).IsRequired();
             modelBuilder.Entity<ConversationHistory>().Property(ch => ch.Role).IsRequired();
+            modelBuilder.Entity<ConversationHistory>().Property(ch => ch.IsDeleted).IsRequired();
+            modelBuilder.Entity<ConversationHistory>().Property(ch => ch.CreatedAt).IsRequired();
 
             modelBuilder.Entity<ForgotPasswordCode>().HasKey(fpc => fpc.Id);
             modelBuilder.Entity<ForgotPasswordCode>().Property(fpc => fpc.Id).ValueGeneratedOnAdd();

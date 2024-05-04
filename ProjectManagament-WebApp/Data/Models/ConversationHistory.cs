@@ -8,6 +8,7 @@
         public string Context { get; set; }
         public string Role { get; set; }
         public bool IsDeleted { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         public User User { get; set; }
         public Module Module { get; set; }
