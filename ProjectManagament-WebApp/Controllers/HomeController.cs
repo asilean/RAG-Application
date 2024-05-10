@@ -2,6 +2,7 @@
 using ProjectManagament_WebApp.Data;
 using ProjectManagament_WebApp.Helpers;
 using ProjectManagament_WebApp.Models;
+using ProjectManagament_WebApp.Sevices;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using ProjectManagament_WebApp.Data.Models;
@@ -12,10 +13,12 @@ namespace ProjectManagament_WebApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly PMContext _context;
-        public HomeController(ILogger<HomeController> logger, PMContext context)
+        private readonly ChatGptService _chatGptService;
+        public HomeController(ILogger<HomeController> logger, PMContext context, ChatGptService chatGptService)
         {
             _logger = logger;
             _context = context;
+            _chatGptService = chatGptService;
         }
 
         public IActionResult Index()
@@ -39,10 +42,16 @@ namespace ProjectManagament_WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> ConversationAsync([FromBody] Conversation conversation)
         {
-            // Logic to save module content based on moduleId
+            var userId = UserHelper.GetUserId(User);
+            if (!userId.HasValue)
+            {
+                return BadRequest("User ID is required.");
+            }
+
+            // Save user question to database
             var questionHistory = new ConversationHistory
             {
-                UserId = (Guid)UserHelper.GetUserId(User),
+                UserId = userId.Value,
                 ModuleId = conversation.ModuleId,
                 Context = conversation.Question,
                 Role = Role.User,
@@ -52,14 +61,13 @@ namespace ProjectManagament_WebApp.Controllers
             _context.ConversationHistories.Add(questionHistory);
             await _context.SaveChangesAsync();
 
-            // Make request to bot service to get response
-            // For example: _botService.GetBotResponse(conversation.Question, conversation.ModuleId);
-            var response = "Bot response";
+            // Get response from GPT-4 based Chat Service
+            var response = await _chatGptService.GetChatCompletionAsync(conversation.Question, conversation.ModuleId);
 
             // Save bot response to database
             var responseHistory = new ConversationHistory
             {
-                UserId = (Guid)UserHelper.GetUserId(User),
+                UserId = userId.Value,
                 ModuleId = conversation.ModuleId,
                 Context = response,
                 Role = Role.Chatbot,
@@ -75,9 +83,15 @@ namespace ProjectManagament_WebApp.Controllers
         [HttpGet]
         public IActionResult DeleteChat(Guid moduleId)
         {
-            _context.ConversationHistories.Where(c => c.ModuleId == moduleId && c.UserId == UserHelper.GetUserId(User)).ToList().ForEach(c => c.IsDeleted = true);
+            var userId = UserHelper.GetUserId(User);
+            if (!userId.HasValue)
+            {
+                return BadRequest("User ID is required.");
+            }
+
+            _context.ConversationHistories.Where(c => c.ModuleId == moduleId && c.UserId == userId.Value).ToList().ForEach(c => c.IsDeleted = true);
             _context.SaveChanges();
-            
+
             return Ok();
         }
 
