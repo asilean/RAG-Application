@@ -42,7 +42,7 @@ namespace ProjectManagament_WebApp.Controllers
             // Logic to save module content based on moduleId
             var questionHistory = new ConversationHistory
             {
-                UserId = UserHelper.GetUserId(User),
+                UserId = (Guid)UserHelper.GetUserId(User),
                 ModuleId = conversation.ModuleId,
                 Context = conversation.Question,
                 Role = Role.User,
@@ -59,7 +59,7 @@ namespace ProjectManagament_WebApp.Controllers
             // Save bot response to database
             var responseHistory = new ConversationHistory
             {
-                UserId = UserHelper.GetUserId(User),
+                UserId = (Guid)UserHelper.GetUserId(User),
                 ModuleId = conversation.ModuleId,
                 Context = response,
                 Role = Role.Chatbot,
