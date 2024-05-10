@@ -33,30 +33,26 @@ const createChatElement = (content, className) => {
 }
 
 const getChatResponse = async (incomingChatDiv) => {
-    const API_URL = "https://api.openai.com/v1/completions";
+    const API_URL = "/Home/Conversation";
     const pElement = document.createElement("p");
+    var moduleId = document.querySelector(".module.active").getAttribute("data-module");
 
     // Define the properties and data for the API request
     const requestOptions = {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${API_KEY}`
         },
         body: JSON.stringify({
-            model: "text-davinci-003",
-            prompt: userText,
-            max_tokens: 2048,
-            temperature: 0.2,
-            n: 1,
-            stop: null
+            moduleId: moduleId,
+            question: userText
         })
     }
 
     // Send POST request to API, get response and set the reponse as paragraph element text
     try {
         const response = await (await fetch(API_URL, requestOptions)).json();
-        pElement.textContent = response.choices[0].text.trim();
+        pElement.textContent = response.answer.trim();
     } catch (error) { // Add error class to the paragraph element and set error text
         pElement.classList.add("error");
         pElement.textContent = "Oops! Something went wrong while retrieving the response. Please try again.";
@@ -73,8 +69,8 @@ const copyResponse = (copyBtn) => {
     // Copy the text content of the response to the clipboard
     const reponseTextElement = copyBtn.parentElement.querySelector("p");
     navigator.clipboard.writeText(reponseTextElement.textContent);
-    copyBtn.textContent = "done";
-    setTimeout(() => copyBtn.textContent = "content_copy", 1000);
+    copyBtn.innerHTML = '<i class="bi bi-check2"></i>';
+    setTimeout(() => copyBtn.innerHTML = '<i class="bi bi-copy"></i>', 2000);
 }
 
 const showTypingAnimation = () => {
@@ -88,7 +84,7 @@ const showTypingAnimation = () => {
                                     <div class="typing-dot" style="--delay: 0.4s"></div>
                                 </div>
                             </div>
-                            <span onclick="copyResponse(this)" class="material-symbols-rounded">content_copy</span>
+                            <span onclick="copyResponse(this)" class="material-symbols-rounded"><i class="bi bi-copy"></i></span>
                         </div>`;
     // Create an incoming chat div with typing animation and append it to chat container
     const incomingChatDiv = createChatElement(html, "incoming");
@@ -122,8 +118,10 @@ const handleOutgoingChat = () => {
 
 deleteButton.addEventListener("click", () => {
     // Remove the chats from local storage and call loadDataFromLocalstorage function
-    if (confirm("Are you sure you want to delete all the chats?")) {
-        localStorage.removeItem("all-chats");
+    if (confirm("Are you sure you want to delete the chat?")) {
+        var moduleId = document.querySelector(".module.active").getAttribute("data-module");
+        const response = fetch(`/Home/DeleteChat?moduleId=${moduleId}`);
+        console.log(response);
         loadDataFromLocalstorage();
     }
 });
