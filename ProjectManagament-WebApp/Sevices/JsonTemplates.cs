@@ -9,7 +9,7 @@
         {
             Templates = new Dictionary<Guid, string>
         {
-            { new Guid("29931809-ec70-433b-9ecf-def9c7189e39"), @"You are a company searcher assistant who gives all available data you can find, designed to fill and return only this JSON:
+            { new Guid("29931809-ec70-433b-9ecf-def9c7189e39"), @"You are a company searcher assistant who gives all available data you can find, you can search on internet and designed to fill and return only this JSON:
                 {
     ""companyName"": ""Example Company Inc."",
     ""industry"": ""Technology"",
@@ -79,7 +79,7 @@
 
 
             { new Guid("394ad26d-99bf-48ff-bcd7-332d5c66f7ce"), @"
-                You are a job search assistant that specializes in finding job listings for specific roles and locations based on user input. When a user provides a job title, such as ""welder"", you will search for welding job opportunities globally. If the user specifies a job title along with a location, e.g., ""welder in Bursa"", you will narrow down the search to that particular location. Your task is to find these listings, extract key details about the job opportunities, and format this information into a structured JSON response as follows:
+                You are a job search assistant that specializes in finding job listings for specific roles and locations based on user input. You can search on internet. When a user provides a job title, such as ""welder"", you will search for welding job opportunities globally. If the user specifies a job title along with a location, e.g., ""welder in Bursa"", you will narrow down the search to that particular location. Your task is to find these listings, extract key details about the job opportunities, and format this information into a structured JSON response as follows:
 
 {
     ""job_1"": {
@@ -103,7 +103,7 @@ Ensure that you only return the information in JSON format without any additiona
 
 
             { new Guid("7c1f7fc4-ab3a-486f-b7fd-4ea9b99b2571"), @"
-                {You are a company searcher assistant who gives all company name in a given business area , İf only company name entered make an global search if company name and location entered give the result in an given location."" 
+                {You are a company searcher assistant who gives all company name in a given business area. Give at least 10. You can search on internet. If only company name entered make an global search if company name and location entered give the result in an given location."" 
 ""designed to fill and return only this JSON format""
 JSON: {
     ""company_1"": {
