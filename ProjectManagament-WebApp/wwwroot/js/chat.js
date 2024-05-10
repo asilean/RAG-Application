@@ -8,7 +8,6 @@ const module2Button = document.querySelector("#module-2");
 const module3Button = document.querySelector("#module-3");
 
 let userText = null;
-const API_KEY = "PASTE-YOUR-API-KEY-HERE"; // Paste your API key here
 
 const loadDataFromLocalstorage = () => {
     // Load saved chats and theme from local storage and apply/add on the page
@@ -53,6 +52,7 @@ const getChatResponse = async (incomingChatDiv) => {
         const response = await (await fetch(API_URL, requestOptions)).json();
         pElement.textContent = response.answer.trim();
     } catch (error) { // Add error class to the paragraph element and set error text
+        console.writeText(error);
         pElement.classList.add("error");
         pElement.textContent = "Oops! Something went wrong while retrieving the response. Please try again.";
     }
