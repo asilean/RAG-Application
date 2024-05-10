@@ -10,6 +10,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<PMContext>();
 builder.Services.AddTransient<IEmailService, EmailService>();
 
+builder.Services.AddSingleton<JsonTemplates>();
+builder.Services.AddHttpClient<ChatGptService>();
+
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
