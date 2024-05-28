@@ -16,7 +16,7 @@ public class ChatGptService
         _httpClient = httpClient;
         _logger = logger;
         _jsonTemplates = jsonTemplates;
-        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "sk-proj-yZVIF8KJShyVIM9u21NhT3BlbkFJkZR6xcAsEnmNS0d3QtLB");
+        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "sk-proj-RCNSIctkt29N6xp4j6paT3BlbkFJSliwytDa886765lpXhgE"); //Api Değiştirilmeli
         _httpClient.BaseAddress = new Uri("https://api.openai.com/v1/");
     }
 
@@ -30,7 +30,7 @@ public class ChatGptService
 
         var payload = new
         {
-            model = "gpt-4-turbo", 
+            model = "gpt-4o", 
             messages = new[]
             {
                 new { role = "system", content = systemContent },
