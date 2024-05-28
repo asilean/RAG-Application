@@ -7,13 +7,13 @@
     <div class="row">
         <ul class="nav nav-pills nav-fill">
             <li class="nav-item mx-2">
-                <button class="nav-link module fw-bold text-light bg-danger active" id="module-1" data-module="29931809-ec70-433b-9ecf-def9c7189e39" type="button">Module 1</button>
+                <button class="nav-link module fw-bold text-light bg-danger active" id="module-1" data-module="29931809-ec70-433b-9ecf-def9c7189e39" type="button">Company Search</button>
             </li>
             <li class="nav-item">
-                <button class="nav-link module fw-bold text-light bg-success bg-opacity-25" id="module-2" data-module="394ad26d-99bf-48ff-bcd7-332d5c66f7ce" type="button">Module 2</button>
+                <button class="nav-link module fw-bold text-light bg-success bg-opacity-25" id="module-2" data-module="394ad26d-99bf-48ff-bcd7-332d5c66f7ce" type="button">Market Share Search</button>
             </li>
             <li class="nav-item mx-2">
-                <button class="nav-link module fw-bold text-light bg-info bg-opacity-25" id="module-3" data-module="7c1f7fc4-ab3a-486f-b7fd-4ea9b99b2571" type="button">Module 3</button>
+                <button class="nav-link module fw-bold text-light bg-info bg-opacity-25" id="module-3" data-module="7c1f7fc4-ab3a-486f-b7fd-4ea9b99b2571" type="button">Field Search</button>
             </li>
         </ul>
     </div>
@@ -82,7 +82,7 @@ else //not logged in
                                             <div class="chat-content">
                                                 <div class="chat-details">
                                                     <i class="bi bi-person-circle fs-3"></i>
-                                                    <p>${response[index].context}</p>
+                                                    <div class="text">${response[index].context}</div>
                                                 </div>
                                             </div>
                                         </div>`;
@@ -91,7 +91,7 @@ else //not logged in
                                             <div class="chat-content">
                                                 <div class="chat-details">
                                                     <i class="bi bi-robot fs-3"></i>
-                                                    <p>${response[index].context}</p>
+                                                    <div class="text">${response[index].context}</div>
                                                 </div>
                                             </div>
                                         </div>`;
