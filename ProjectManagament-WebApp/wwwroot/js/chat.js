@@ -10,15 +10,12 @@ const module3Button = document.querySelector("#module-3");
 let userText = null;
 
 const loadDataFromLocalstorage = () => {
-    // Load saved chats and theme from local storage and apply/add on the page
-    const themeColor = localStorage.getItem("themeColor");
-
     const defaultText = `<div class="default-text">
                                     <h1>Companier</h1>
                                     <p>Start a conversation and explore the secrets of companies.<br> Your chat history will be displayed here.</p>
                                 </div>`
 
-    chatContainer.innerHTML = localStorage.getItem("all-chats") || defaultText;
+    chatContainer.innerHTML = defaultText;
     chatContainer.scrollTo(0, chatContainer.scrollHeight); // Scroll to bottom of the chat container
 }
 
@@ -32,7 +29,8 @@ const createChatElement = (content, className) => {
 
 const getChatResponse = async (incomingChatDiv) => {
     const API_URL = "/Home/Conversation";
-    const pElement = document.createElement("p");
+    const divElement = document.createElement("div");
+    divElement.classList.add("text");
     var moduleId = document.querySelector(".module.active").getAttribute("data-module");
 
     // Define the properties and data for the API request
@@ -50,23 +48,23 @@ const getChatResponse = async (incomingChatDiv) => {
     // Send POST request to API, get response and set the reponse as paragraph element text
     try {
         const response = await (await fetch(API_URL, requestOptions)).json();
-        pElement.textContent = response.answer.trim();
+        divElement.innerHTML = response.answer.trim();
     } catch (error) { // Add error class to the paragraph element and set error text
         console.writeText(error);
-        pElement.classList.add("error");
-        pElement.textContent = "Oops! Something went wrong while retrieving the response. Please try again.";
+        divElement.classList.add("error");
+        divElement.textContent = "Oops! Something went wrong while retrieving the response. Please try again.";
     }
 
     // Remove the typing animation, append the paragraph element and save the chats to local storage
     incomingChatDiv.querySelector(".typing-animation").remove();
-    incomingChatDiv.querySelector(".chat-details").appendChild(pElement);
+    incomingChatDiv.querySelector(".chat-details").appendChild(divElement);
     localStorage.setItem("all-chats", chatContainer.innerHTML);
     chatContainer.scrollTo(0, chatContainer.scrollHeight);
 }
 
 const copyResponse = (copyBtn) => {
     // Copy the text content of the response to the clipboard
-    const reponseTextElement = copyBtn.parentElement.querySelector("p");
+    const reponseTextElement = copyBtn.parentElement.querySelector(".text");
     navigator.clipboard.writeText(reponseTextElement.textContent);
     copyBtn.innerHTML = '<i class="bi bi-check2"></i>';
     setTimeout(() => copyBtn.innerHTML = '<i class="bi bi-copy"></i>', 2000);
@@ -103,7 +101,7 @@ const handleOutgoingChat = () => {
     const html = `<div class="chat-content">
                             <div class="chat-details">
                                 <i class="bi bi-person-circle fs-3""></i>
-                                <p>${userText}</p>
+                                <div class="text">${userText}</div>
                             </div>
                         </div>`;
 

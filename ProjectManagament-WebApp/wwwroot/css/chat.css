@@ -129,7 +129,7 @@ span.material-symbols-rounded {
         border-radius: 2px;
     }
 
-    .chat .chat-details p {
+    .chat .chat-details .text {
         white-space: pre-wrap;
         font-size: 1.05rem;
         padding: 0 50px 0 25px;
@@ -137,7 +137,7 @@ span.material-symbols-rounded {
         word-break: break-word;
     }
 
-        .chat .chat-details p.error {
+        .chat .chat-details .text.error {
             color: #e55865;
         }
 

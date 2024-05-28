@@ -2,6 +2,8 @@
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
+using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Authentication;
 using Newtonsoft.Json;
 using ProjectManagament_WebApp.Sevices;
 
@@ -10,6 +12,7 @@ public class ChatGptService
     private readonly HttpClient _httpClient;
     private readonly ILogger<ChatGptService> _logger;
     private readonly JsonTemplates _jsonTemplates;
+    private static readonly Regex InsignificantHtmlWhitespace = new Regex(@"(?<=>)\s+?(?=<)");
 
     public ChatGptService(HttpClient httpClient, ILogger<ChatGptService> logger, JsonTemplates jsonTemplates)
     {
@@ -23,10 +26,6 @@ public class ChatGptService
     public async Task<string> GetChatCompletionAsync(string prompt, Guid moduleId)
     {
         var systemContent = _jsonTemplates.GetTemplate(moduleId);
-
-        Debug.WriteLine(systemContent);
-        Debug.WriteLine(prompt);
-        Debug.WriteLine(moduleId);
 
         var payload = new
         {
@@ -59,7 +58,8 @@ public class ChatGptService
                     var firstChoice = choicesElement[0];
                     if (firstChoice.TryGetProperty("message", out var messageElement) && messageElement.TryGetProperty("content", out var contentElement) && contentElement.ValueKind == JsonValueKind.String)
                     {
-                        return contentElement.GetString();
+                        var responseContent = contentElement.GetString().Replace("```html", string.Empty).Replace("```", string.Empty).Replace("\n", string.Empty);
+                        return InsignificantHtmlWhitespace.Replace(responseContent, string.Empty).Trim();
                     }
                 }
                 return "No valid response or 'choices' is empty.";
