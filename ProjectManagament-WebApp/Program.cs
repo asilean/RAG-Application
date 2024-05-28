@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 using ProjectManagament_WebApp.Data;
 using ProjectManagament_WebApp.Sevices;
 
@@ -6,6 +7,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Configure DbContext with connection string
+builder.Services.AddDbContext<PMContext>(options =>
+    options.UseSqlServer("Server=localhost;Database=Companier;Trusted_Connection=True;TrustServerCertificate=True;"));
+
 
 builder.Services.AddDbContext<PMContext>();
 builder.Services.AddTransient<IEmailService, EmailService>();
