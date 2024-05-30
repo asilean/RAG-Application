@@ -16,7 +16,8 @@ namespace ProjectManagament_WebApp.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server=localhost; database=Companier; integrated security=true;");
+            optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=Companier;Integrated Security=True;TrustServerCertificate=True;");
+
             optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information);
             base.OnConfiguring(optionsBuilder);
         }
