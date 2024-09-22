@@ -1,1 +1,1 @@
-# RAG-Application
+This project aims to enhance companies' business processes and strategic decision-making processes by utilizing advanced technologies such as artificial intelligence. By leveraging new technologies like GPT-4, the goal is to automate business processes, increase efficiency, reduce costs, create new revenue streams, and strengthen strategic decision-making processes by identifying and evaluating potential application areas of artificial intelligence.![image](https://github.com/user-attachments/assets/c1384874-718e-42b8-a7ee-0b6d47535cf9)
